@@ -132,6 +132,9 @@
     <Compile Include="DataAccess\PolicyByClient.cs">
       <DependentUpon>Modeldb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Entity.cs" />
+    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\QueryParameters.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
