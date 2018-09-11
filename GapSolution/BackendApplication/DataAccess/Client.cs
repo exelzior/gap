@@ -9,10 +9,11 @@
 
 namespace BackendApplication.DataAccess
 {
+    using BackendApplication.Data;
     using System;
     using System.Collections.Generic;
     
-    public partial class Client
+    public partial class Client :Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }
