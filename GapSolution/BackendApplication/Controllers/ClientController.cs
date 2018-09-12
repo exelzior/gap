@@ -1,4 +1,5 @@
 ﻿using BackendApplication.Data.Repositories;
+using BackendApplication.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,13 +35,15 @@ namespace BackendApplication.Controllers
         }
 
         // POST: api/Client
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Client value)
         {
+            _repository.Add(value);
         }
 
         // PUT: api/Client/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]Client value)
         {
+            _repository.toUpdate(value);
         }
 
         // DELETE: api/Client/5
