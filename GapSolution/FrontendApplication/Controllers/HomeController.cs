@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FrontendApplication.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class HomeController : Controller
     {
         // GET: Home
@@ -15,6 +16,11 @@ namespace FrontendApplication.Controllers
         }
 
         public ActionResult Admin()
+        {
+            return View();
+        }
+
+        public ActionResult NewPolicy()
         {
             return View();
         }

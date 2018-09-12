@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace BackendApplication.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PoliciesController : ApiController
     {
         private PolicyRepository _repository;
@@ -37,9 +39,18 @@ namespace BackendApplication.Controllers
         }
 
         // POST: api/Policies
-        public void Post([FromBody]Policy value)
-        {            
-            _repository.Add(value);
+        public HttpStatusCode Post([FromBody]Policy value)
+        {
+            try
+            {
+                _repository.Add(value);
+                return HttpStatusCode.Accepted;
+            }
+            catch (Exception)
+            {
+                return HttpStatusCode.NotFound;                
+            }
+
         }
 
         // PUT: api/Policies/5

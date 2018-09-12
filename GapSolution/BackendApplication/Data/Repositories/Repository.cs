@@ -12,6 +12,7 @@ namespace BackendApplication.Data
         public void Add(T entity)
         {
             using(var db = new DatabaseDbEntities()) {
+                entity.Id = db.Policy.Count() + 1;               
                 db.Entry(entity).State = System.Data.Entity.EntityState.Added;
                 db.SaveChanges();
             };            

@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "NewPolicy";
+}
+@Html.Partial("_PartialMenu")
+<script src="~/Scripts/jquery-1.10.1.min.js"></script>
+
+<div class="form-horizontal">
+    <fieldset>
+        <!-- Form Name -->
+        <legend>New Policy</legend>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textName">Name</label>
+            <div class="col-md-6">
+                <input id="textName" name="textName" type="text" placeholder="" class="form-control input-lg">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textDescription">Description</label>
+            <div class="col-md-6">
+                <input id="textDescription" name="textDescription" type="text" placeholder="" class="form-control input-lg">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textDescription">Start Date</label>
+            <div class="col-md-6">
+                <input id="textStartDate" name="textStartDate" type="date" placeholder="" class="form-control input-lg">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textDuration">Duration</label>
+            <div class="col-md-6">
+                <input id="textDuration" name="textDuration" type="number" placeholder="" class="form-control input-lg">
+
+            </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textDuration">Price</label>
+            <div class="col-md-6">
+                <input id="textPrice" name="textPrice" type="number" placeholder="" class="form-control input-lg">
+
+            </div>
+        </div>
+        <!-- Select Basic -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="selectbasic">Select Risk</label>
+            <div class="col-md-4">
+                <select id="selectRisk" name="selectRisk" class="form-control">
+                    <option value="0">SELECT ONE</option>
+                    <option value="1">BAJO</option>
+                    <option value="2">MEDIO</option>
+                    <option value="3">MEDIO-ALTO</option>
+                    <option value="4">ALTO</option>
+                </select>
+            </div>
+        </div>
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="button1id"></label>
+            <div class="col-md-8">
+                <button id="btnCancel" name="btnCancel" class="btn btn-danger">CANCEL</button>
+                <button id="btnSave" name="btnSave" class="btn btn-success">SAVE</button>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<script type="text/javascript">
+    $('#btnSave').click(function () {
+
+        var policy = {
+            Name:$('#textName').val(),
+            Description : $('#textName').val(),
+            StartDate : $('#textStartDate').val(),
+            Duration : $('#textDuration').val(),
+            RiskType : $("#selectRisk option:selected").text()
+        }
+        var stPolicy = JSON.stringify(policy)
+        var ss = ""
+        $.ajax({
+            url: 'http://localhost:63457/api/Policies',
+            method: 'POST',
+            dataType: 'json',
+            crossDomain: true,
+            contentType: 'application/json',
+            data: policy,
+            statusCode: {
+                200: function () {
+                    nameuser();
+                },
+                404: function (jqXHR) {
+                    $('#divErrorText').text(jqXHR.responseText);
+                    $('#divError').show('fade');
+                },
+                401: function () {
+                    window.location.href = "login.html";
+                }
+            }
+        });
+
+        
+    });
+
+</script>
+
